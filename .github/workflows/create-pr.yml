@@ -1,0 +1,39 @@
+name: Auto Create PR to Develop and Staging
+
+on:
+  push:
+    branches:
+      - 'sprint-*'
+
+jobs:
+  create_pull_requests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          node-version: 18.0
+          cache: yarn
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'petrovski.k@gmail.com'
+
+      - name: Create Pull Request to Develop-Demo
+        uses: repo-sync/pull-request@v2
+        with:
+          node-version: 18.0
+          cache: yarn
+          destination_branch: 'develop-demo'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: 'Merge sprint changes into Develop-Demo'
+          pr_body: 'Automated PR to merge sprint changes into Develop-Demo'
+
+      # - name: Create Pull Request to Staging
+      #   uses: repo-sync/pull-request@v2
+      #   with:
+      #     destination_branch: 'stagging'
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     pr_title: 'Merge sprint changes into Staging'
+      #     pr_body: 'Automated PR to merge sprint changes into Staging'

@@ -1,0 +1,5 @@
+<svg  preserveAspectRatio="xMinYMin slice" width="100%" height="100%"
+ viewBox="0 0 50 62" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="25.2606" cy="14.0165" r="13.5165"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.931641 53.3462V40.9121C0.931641 35.3893 5.40879 30.9121 10.9316 30.9121H39.591C45.1138 30.9121 49.591 35.3893 49.591 40.9121V53.3461C42.9577 58.7559 34.4883 62 25.2612 62C16.0342 62 7.56492 58.756 0.931641 53.3462Z"/>
+</svg>

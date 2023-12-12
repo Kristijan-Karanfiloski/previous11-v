@@ -1,0 +1,77 @@
+{
+  "expo": {
+    "name": "Next11 Tracking App V2",
+    "slug": "next11-reaxt-native-v2",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#E5004D"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/75eb8bfe-51b1-4158-ab82-ebe3a5c12484"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "jsEngine": "jsc",
+    "ios": {
+      "buildNumber": "18",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.next11.app",
+      "googleServicesFile": "./certs/GoogleService-Info.plist",
+      "requireFullScreen": true,
+      "infoPlist": {
+        "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
+        "UISupportedInterfaceOrientations~ipad": [
+          "UIInterfaceOrientationPortrait"
+        ],
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "This app uses the camera to let you upload a profile picture."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.next11.app",
+      "googleServicesFile": "./certs/GoogleService-Info.plist"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/crashlytics",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to set a profile picture.",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera to take a profile picture."
+        }
+      ],
+      "expo-localization",
+      "@logrocket/react-native"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "75eb8bfe-51b1-4158-ab82-ebe3a5c12484"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>945891175145-4b45dnlk01ve5o25lnl7u52n716b2j96.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.945891175145-4b45dnlk01ve5o25lnl7u52n716b2j96</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>945891175145-90310cql4c79g7adp96hsldshfl4vdmq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBKjY49IdmDraDWsTZU0ZiH0DoSQQ9iW5M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>945891175145</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.minglabs.next11.universal.dev</string>
+	<key>PROJECT_ID</key>
+	<string>next11-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>next11-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:945891175145:ios:e7dfa6ed58435312d11e78</string>
+	<key>DATABASE_URL</key>
+	<string>https://next11-dev.firebaseio.com</string>
+</dict>
+</plist>

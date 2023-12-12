@@ -1,0 +1,105 @@
+{
+  "cli": {
+    "version": ">= 3.0.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development"
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "staging"
+    },
+    "testing": {
+      "channel": "testing",
+      "ios": {
+        "autoIncrement": "buildNumber"
+      },
+      "env": {
+        "APP_VARIANT": "testing",
+        "BUNDLE_ID": "com.next11.app.testing",
+        "APP_NAME": "Next11 Tracking App (Dev)"
+      }
+    },
+    "stagging": {
+      "channel": "staging",
+      "ios": {
+        "autoIncrement": "buildNumber"
+      },
+      "env": {
+        "APP_VARIANT": "staging",
+        "BUNDLE_ID": "com.next11.app.stg",
+        "APP_NAME": "Next11 Tracking App (Stg)"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "ios": {
+        "autoIncrement": "buildNumber"
+      },
+      "env": {
+        "APP_VARIANT": "production",
+        "BUNDLE_ID": "com.next11.app",
+        "APP_NAME": "Next11 Tracking App"
+      }
+    },
+    "development-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      },
+      "channel": "development-simulator",
+      "env": {
+        "APP_VARIANT": "development",
+        "BUNDLE_ID": "com.next11.app.testing",
+        "APP_NAME": "Next11 Tracking App (Dev)"
+      }
+    },
+    "production-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      },
+      "channel": "development-simulator",
+      "env": {
+        "APP_VARIANT": "production",
+        "BUNDLE_ID": "com.next11.app",
+        "APP_NAME": "Next11 Tracking App"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "kikoo_15-JBT@hotmail.com",
+        "ascAppId": "1670980931",
+        "appleTeamId": "W55JM926U9"
+      }
+    },
+    "development": {
+      "ios": {
+        "appleId": "kikoo_15-JBT@hotmail.com",
+        "ascAppId": "1670980931",
+        "appleTeamId": "W55JM926U9"
+      }
+    },
+    "staging": {
+      "ios": {
+        "appleId": "kikoo_15-JBT@hotmail.com",
+        "ascAppId": "1670980931",
+        "appleTeamId": "W55JM926U9"
+      }
+    },
+    "testing": {
+      "ios": {
+        "appleId": "kikoo_15-JBT@hotmail.com",
+        "ascAppId": "1670980931",
+        "appleTeamId": "W55JM926U9"
+      }
+    }
+  }
+}
