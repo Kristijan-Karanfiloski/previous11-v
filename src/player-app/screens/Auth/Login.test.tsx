@@ -77,4 +77,41 @@ describe('Login component', () => {
     // Assert that the logo and input fields are rendered
     // expect(mockNavigate).toHaveBeenCalledWith('ResetPassword', { email });
   });
+  it('allows entering email and password', () => {
+    const { getByPlaceholderText, getByText } = render(
+      <Provider store={store}>
+        <Login  />
+      </Provider>
+    );
+
+    const emailInput = getByPlaceholderText('Email');
+    const passwordInput = getByPlaceholderText('Password');
+    const loginButton = getByText('Login →');
+
+    fireEvent.changeText(emailInput, 'test@example.com');
+    fireEvent.changeText(passwordInput, 'password123');
+
+    // Instead of checking props, we  can assert based on expected behavior.
+    // For example, the login button should be enabled when both email and password are provided.
+    expect(loginButton).not.toBeDisabled();
+  });
+
+  it('should check if the forget your password touchable is called with the navigation function',()=>{
+    const mockNavigate = jest.fn();
+    const navigation = { navigate: mockNavigate };
+
+    // Render the component
+    render(
+      <Provider store={store}>
+        <Login navigation={navigation}  />
+      </Provider>
+    );
+
+    const forgotPass=screen.getByText(/forgot your password/i)
+
+    fireEvent.press(forgotPass)
+
+  expect(mockNavigate).toHaveBeenCalled()
+  })
+
 });
