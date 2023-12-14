@@ -1,9 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import Login from './Login';
 import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store'
+import configureMockStore from 'redux-mock-store';
 import '@testing-library/jest-native/extend-expect';
-
 
 const initialState = {
   auth: {
@@ -43,6 +42,10 @@ const initialState = {
 const mockStore = configureMockStore();
 const store = mockStore(initialState);
 
+//Mock PROPS:
+const mockNvigation = { navigate: jest.fn() };
+const mockRoute = { params: {} };
+
 // mocking module
 jest.mock('@logrocket/react-native', () => ({
   default: {
@@ -65,10 +68,10 @@ describe('Login component', () => {
       </Provider>
     );
 
-    const passwordInput=screen.getByPlaceholderText(/password/i)
-    const loginButton=screen.getByText('Login →');
+    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const loginButton = screen.getByText('Login →');
 
-    fireEvent.changeText(passwordInput,'Next11!!');
+    fireEvent.changeText(passwordInput, 'Next11!!');
 
     expect(loginButton).toBeEnabled();
 
@@ -80,7 +83,7 @@ describe('Login component', () => {
   it('allows entering email and password', () => {
     const { getByPlaceholderText, getByText } = render(
       <Provider store={store}>
-        <Login  />
+        <Login navigation={mockNvigation} route={mockRoute} />
       </Provider>
     );
 
@@ -96,22 +99,21 @@ describe('Login component', () => {
     expect(loginButton).not.toBeDisabled();
   });
 
-  it('should check if the forget your password touchable is called with the navigation function',()=>{
+  it('should check if the forget your password touchable is called with the navigation function', () => {
     const mockNavigate = jest.fn();
-    const navigation = { navigate: mockNavigate };
+    // const navigation = { navigate: mockNavigate };
 
     // Render the component
     render(
       <Provider store={store}>
-        <Login navigation={navigation}  />
+        <Login navigation={mockNvigation} route={mockRoute} />
       </Provider>
     );
 
-    const forgotPass=screen.getByText(/forgot your password/i)
+    const forgotPass = screen.getByText(/forgot your password/i);
 
-    fireEvent.press(forgotPass)
+    fireEvent.press(forgotPass);
 
-  expect(mockNavigate).toHaveBeenCalled()
-  })
-
+    expect(mockNavigate).toHaveBeenCalled();
+  });
 });
