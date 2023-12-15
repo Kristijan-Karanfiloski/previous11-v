@@ -1,4 +1,10 @@
-jest.mock('@react-native-async-storage/async-storage', () => require('@react-native-async-storage/async-storage/jest/async-storage-mock'));
+//GLOBAL THAT WILL BE USED FOR EVERY TEST
+
+import '@testing-library/jest-native/extend-expect';
+
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock')
+);
 
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
@@ -17,10 +23,10 @@ const abortFn = jest.fn();
 // @ts-ignore
 global.AbortController = jest.fn(() => ({
   abort: abortFn,
-  signal : {
+  signal: {
     aborted: false,
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    dispatchEvent: jest.fn()
   }
 }));

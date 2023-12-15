@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import Login from './Login';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import '@testing-library/jest-native/extend-expect';
+import Login from '../Login';
 
 const initialState = {
   auth: {
@@ -42,10 +41,6 @@ const initialState = {
 const mockStore = configureMockStore();
 const store = mockStore(initialState);
 
-//Mock PROPS:
-const mockNvigation = { navigate: jest.fn() };
-const mockRoute = { params: {} };
-
 // mocking module
 jest.mock('@logrocket/react-native', () => ({
   default: {
@@ -55,6 +50,7 @@ jest.mock('@logrocket/react-native', () => ({
 
 describe('Login component', () => {
   it('should render the login component', () => {
+    //ARRANGE
     // Mock dependencies
     const mockNavigate = jest.fn();
     const navigation = { navigate: mockNavigate };
@@ -68,32 +64,39 @@ describe('Login component', () => {
       </Provider>
     );
 
+    //ACT
+
     const passwordInput = screen.getByPlaceholderText(/password/i);
     const loginButton = screen.getByText('Login →');
 
     fireEvent.changeText(passwordInput, 'Next11!!');
 
+    //ASSERT
     expect(loginButton).toBeEnabled();
 
     // screen.debug();
-
-    // Assert that the logo and input fields are rendered
-    // expect(mockNavigate).toHaveBeenCalledWith('ResetPassword', { email });
   });
   it('allows entering email and password', () => {
-    const { getByPlaceholderText, getByText } = render(
+    //ARRANGE
+    const mockNavigate = jest.fn();
+    const mockNavigation = { navigate: mockNavigate };
+    const mockRoute = { params: { email: 'andrea+04@next11.co' } };
+
+    render(
       <Provider store={store}>
-        <Login navigation={mockNvigation} route={mockRoute} />
+        <Login navigation={mockNavigation} route={mockRoute} />
       </Provider>
     );
 
-    const emailInput = getByPlaceholderText('Email');
-    const passwordInput = getByPlaceholderText('Password');
-    const loginButton = getByText('Login →');
+    const emailInput = screen.getByPlaceholderText('Email');
+    const passwordInput = screen.getByPlaceholderText('Password');
+    const loginButton = screen.getByText('Login →');
 
+    //ACT
     fireEvent.changeText(emailInput, 'test@example.com');
     fireEvent.changeText(passwordInput, 'password123');
 
+    //ASSERT
     // Instead of checking props, we  can assert based on expected behavior.
     // For example, the login button should be enabled when both email and password are provided.
     expect(loginButton).not.toBeDisabled();
@@ -101,19 +104,22 @@ describe('Login component', () => {
 
   it('should check if the forget your password touchable is called with the navigation function', () => {
     const mockNavigate = jest.fn();
-    // const navigation = { navigate: mockNavigate };
+    const mockNavigation = { navigate: mockNavigate };
+    const mockRoute = { params: { email: 'andrea+04@next11.co' } };
 
-    // Render the component
+    // Arrange
     render(
       <Provider store={store}>
-        <Login navigation={mockNvigation} route={mockRoute} />
+        <Login navigation={mockNavigation} route={mockRoute} />
       </Provider>
     );
 
     const forgotPass = screen.getByText(/forgot your password/i);
 
+    //Act
     fireEvent.press(forgotPass);
 
+    //Assert
     expect(mockNavigate).toHaveBeenCalled();
   });
 });
