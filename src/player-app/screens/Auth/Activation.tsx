@@ -53,6 +53,7 @@ const Activation = ({ navigation }: ActivationProps) => {
           source={logoBlack}
           style={{ width: 60, height: 60 }}
           resizeMode="cover"
+          testID="logo-img"
         />
         <Text style={styles.introText}>Welcome!</Text>
         <Text style={styles.hintText}>

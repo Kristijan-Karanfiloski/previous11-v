@@ -2,6 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import Login from '../Login';
+import { Alert } from 'react-native';
+import * as firestoreService from '../../../../helpers/firestoreService';
 
 const initialState = {
   auth: {
@@ -25,18 +27,16 @@ const initialState = {
   }
 };
 
-// const abortFn = jest.fn();
-//
-// // @ts-ignore
-// global.AbortController = jest.fn(() => ({
-//   abort: abortFn,
-//   signal : {
-//     aborted: false,
-//     addEventListener: jest.fn(),
-//     removeEventListener: jest.fn(),
-//     dispatchEvent: jest.fn(),
-//   }
-// }));
+// Mock the loginUser function
+jest.mock('../../../../helpers/firestoreService', () => ({
+  ...jest.requireActual('../../../../helpers/firestoreService'), // this line is to keep other exports unchanged
+  loginUser: jest.fn().mockResolvedValue({
+    user: {
+      email: 'user@example.com',
+      password: 'password123'
+    }
+  })
+}));
 
 const mockStore = configureMockStore();
 const store = mockStore(initialState);
@@ -49,8 +49,8 @@ jest.mock('@logrocket/react-native', () => ({
 }));
 
 describe('Login component', () => {
-  it('should render the login component', () => {
-    //ARRANGE
+  it('after filling out the inputs to make the login button enabled', () => {
+    //?ARRANGE
     // Mock dependencies
     const mockNavigate = jest.fn();
     const navigation = { navigate: mockNavigate };
@@ -64,20 +64,19 @@ describe('Login component', () => {
       </Provider>
     );
 
-    //ACT
-
+    //?ACT
     const passwordInput = screen.getByPlaceholderText(/password/i);
     const loginButton = screen.getByText('Login →');
 
     fireEvent.changeText(passwordInput, 'Next11!!');
 
-    //ASSERT
+    //?ASSERT
     expect(loginButton).toBeEnabled();
 
     // screen.debug();
   });
   it('allows entering email and password', () => {
-    //ARRANGE
+    //?ARRANGE
     const mockNavigate = jest.fn();
     const mockNavigation = { navigate: mockNavigate };
     const mockRoute = { params: { email: 'andrea+04@next11.co' } };
@@ -92,11 +91,11 @@ describe('Login component', () => {
     const passwordInput = screen.getByPlaceholderText('Password');
     const loginButton = screen.getByText('Login →');
 
-    //ACT
+    //?ACT
     fireEvent.changeText(emailInput, 'test@example.com');
     fireEvent.changeText(passwordInput, 'password123');
 
-    //ASSERT
+    //?ASSERT
     // Instead of checking props, we  can assert based on expected behavior.
     // For example, the login button should be enabled when both email and password are provided.
     expect(loginButton).not.toBeDisabled();
@@ -107,7 +106,7 @@ describe('Login component', () => {
     const mockNavigation = { navigate: mockNavigate };
     const mockRoute = { params: { email: 'andrea+04@next11.co' } };
 
-    // Arrange
+    //? Arrange
     render(
       <Provider store={store}>
         <Login navigation={mockNavigation} route={mockRoute} />
@@ -116,10 +115,60 @@ describe('Login component', () => {
 
     const forgotPass = screen.getByText(/forgot your password/i);
 
-    //Act
+    //?ACT
     fireEvent.press(forgotPass);
 
-    //Assert
+    //?Assert
     expect(mockNavigate).toHaveBeenCalled();
+  });
+  it('should display alert message when email or password is empty', () => {
+    // Arrange
+    jest.spyOn(Alert, 'alert');
+    const mockNavigate = jest.fn();
+    const navigation = { navigate: mockNavigate };
+    const route = { params: { email: 'example@example.com' } };
+
+    render(
+      <Provider store={store}>
+        <Login navigation={navigation} route={route} />
+      </Provider>
+    );
+
+    const loginButton = screen.getByText('Login →');
+
+    // Act
+    fireEvent.press(loginButton);
+
+    // Assert
+    expect(Alert.alert).toHaveBeenCalledWith(
+      'Please enter your email and password'
+    );
+  });
+  it('should call loginUser function with email and password when login button is pressed', async () => {
+    //! Arrange
+    const mockNavigate = jest.fn();
+    const navigation = { navigate: mockNavigate };
+    const route = { params: { email: 'example@example.com' } };
+
+    render(
+      <Provider store={store}>
+        <Login navigation={navigation} route={route} />
+      </Provider>
+    );
+
+    const emailInput = screen.getByPlaceholderText('Email');
+    const passwordInput = screen.getByPlaceholderText('Password');
+    const loginButton = screen.getByText('Login →');
+
+    //! Act
+    fireEvent.changeText(emailInput, 'test@example.com');
+    fireEvent.changeText(passwordInput, 'password123');
+    fireEvent.press(loginButton);
+
+    //! Assert
+    expect(firestoreService.loginUser).toHaveBeenCalledWith(
+      'test@example.com',
+      'password123'
+    );
   });
 });
