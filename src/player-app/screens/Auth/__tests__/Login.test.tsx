@@ -4,6 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import Login from '../Login';
 import { Alert } from 'react-native';
 import * as firestoreService from '../../../../helpers/firestoreService';
+import Activation from '../Activation';
 
 const initialState = {
   auth: {
@@ -49,6 +50,14 @@ jest.mock('@logrocket/react-native', () => ({
 }));
 
 describe('Login component', () => {
+  it('should render the component without crashing', () => {
+    render(
+      <Provider store={store}>
+        <Login navigation={() => {}} route={() => {}} />
+      </Provider>
+    );
+  });
+
   it('after filling out the inputs to make the login button enabled', () => {
     //?ARRANGE
     // Mock dependencies

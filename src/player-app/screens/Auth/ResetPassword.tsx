@@ -53,6 +53,7 @@ const ResetPassword = ({ navigation, route }: ResetPasswordProps) => {
   return (
     <View style={styles.container}>
       <Image
+        testID="image-bgSplash"
         source={bgSplash}
         style={{
           position: 'absolute',
