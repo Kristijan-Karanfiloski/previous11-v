@@ -7,6 +7,10 @@ jest.mock('@react-native-async-storage/async-storage', () =>
 
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
+jest.mock('@react-native-firebase/auth');
+
+jest.mock('react-native');
+
 // global.AbortController = function() {
 //   this.abort = jest.fn();
 //   this.signal = {

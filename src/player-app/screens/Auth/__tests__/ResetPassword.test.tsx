@@ -1,11 +1,13 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from '@testing-library/react-native';
 import ResetPassword from '../ResetPassword';
+import auth from '@react-native-firebase/auth';
 
-jest.mock('@react-native-firebase/auth', () => {
-  return () => ({
-    sendPasswordResetEmail: jest.fn().mockResolvedValue(undefined)
-  });
-});
+jest.spyOn(auth(), 'sendPasswordResetEmail').mockResolvedValue(undefined);
 
 describe('ResetPassword', () => {
   it('component should render without crashing', () => {
@@ -62,43 +64,40 @@ describe('ResetPassword', () => {
     expect(mockGoBack).toHaveBeenCalled();
   });
 
-  //TODO : to improve the tests with mocking the auth
+  it('should', async () => {
+    const email = 'user@example.com';
 
-  // it('should display error message when reset password email fails to send', async () => {
-  //   // jest.spyOn(auth(), 'sendPasswordResetEmail');
-  //   // Extend the type of the mock to accept an email address as an argument
-  //   (auth().sendPasswordResetEmail as jest.Mock).mockResolvedValue(undefined);
-  //
-  //   render(<ResetPassword navigation={() => {}} route={() => {}} />);
-  //
-  //   // const emailInput = screen.getByPlaceholderText('Email');
-  //   const sendResetPasswordButton = screen.getByText('Send →');
-  //
-  //   // fireEvent.changeText(emailInput, 'test@test.com');
-  //   fireEvent.press(sendResetPasswordButton);
-  //
-  //   expect(auth().sendPasswordResetEmail).toHaveBeenCalledWith('test@test.com');
-  //
-  //   // await waitFor(() => {
-  //   //   expect(auth().sendPasswordResetEmail).toHaveBeenCalledWith(
-  //   //     'test@test.com'
-  //   //   );
-  //   // });
-  // });
+    render(<ResetPassword navigation={() => {}} route={() => {}} />);
 
-  // it('should send reset password email successfully when email is valid', async () => {
-  //   const email = 'joe.bloggs@example.com';
+    const emailInput = screen.getByPlaceholderText('Email');
+    const sendResetPasswordButton = screen.getByText('Send →');
+
+    fireEvent.changeText(emailInput, 'user@example.com');
+
+    fireEvent.press(sendResetPasswordButton);
+
+    await waitFor(() => {
+      expect(auth().sendPasswordResetEmail).toHaveBeenCalledWith(email);
+    });
+    // await act(() => email);
+  });
+
+  //TODO: need to test the alert message
+
+  // it('should display an alert error message', async () => {
+  //   // const alertMessage = 'The email dosent exist';
   //
   //   render(<ResetPassword navigation={() => {}} route={() => {}} />);
   //
   //   const emailInput = screen.getByPlaceholderText('Email');
-  //   fireEvent.changeText(emailInput, 'test@test.com');
+  //   const sendResetPasswordButton = screen.getByText('Send →');
   //
-  //   const sendButton = screen.getByText('Send →');
-  //   fireEvent.press(sendButton);
+  //   fireEvent.changeText(emailInput, 'user@example.com');
+  //
+  //   fireEvent.press(sendResetPasswordButton);
   //
   //   await waitFor(() => {
-  //     expect(auth().sendPasswordResetEmail).toHaveBeenCalledWith(email);
+  //     expect(Alert.alert).toHaveBeenCalledWith('The email dosent exist');
   //   });
   // });
 });
