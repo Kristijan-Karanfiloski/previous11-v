@@ -28,7 +28,6 @@ const initialState = {
   }
 };
 
-// Mock the loginUser function
 jest.mock('../../../../helpers/firestoreService', () => ({
   ...jest.requireActual('../../../../helpers/firestoreService'), // this line is to keep other exports unchanged
   loginUser: jest.fn().mockResolvedValue({

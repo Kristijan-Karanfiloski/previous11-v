@@ -9,18 +9,6 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
 jest.mock('@react-native-firebase/auth');
 
-jest.mock('react-native');
-
-// global.AbortController = function() {
-//   this.abort = jest.fn();
-//   this.signal = {
-//     aborted: false,
-//     addEventListener: jest.fn(),
-//     removeEventListener: jest.fn(),
-//     dispatchEvent: jest.fn(),
-//   };
-// };
-
 const abortFn = jest.fn();
 
 // @ts-ignore
