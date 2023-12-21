@@ -16,6 +16,7 @@ const ResetPasswordConfirmation = ({
   return (
     <View style={styles.container}>
       <Image
+        testID="image-bgSplash"
         source={bgSplash}
         style={{
           position: 'absolute',
