@@ -20,7 +20,8 @@ const NotificationModal = ({
   onSubmit
 }: NotificationModalProps) => {
   const activeClub = useAppSelector(selectActiveClub);
-  const isHockey = activeClub.gameType === 'hockey';
+  const isHockey = activeClub?.gameType === 'hockey';
+  //! added ? after activeClub for problem with testing
 
   return (
     <Modal isVisible={isVisible} animationIn="fadeIn" animationOut="fadeOut">

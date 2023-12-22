@@ -61,13 +61,13 @@ const Activities = ({ navigation }: ActivitiesProps) => {
 
   const checkNotificationPermission = async () => {
     const authStatus = await messaging().hasPermission();
-
+    //! added ? for the autStatus
     const shouldShowModal =
-      authStatus === messaging.AuthorizationStatus.NOT_DETERMINED;
+      authStatus === messaging.AuthorizationStatus?.NOT_DETERMINED;
 
     const hasAuthorized =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+      authStatus === messaging.AuthorizationStatus?.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus?.PROVISIONAL;
 
     if (shouldShowModal) {
       setShowNotificationModal(true);
