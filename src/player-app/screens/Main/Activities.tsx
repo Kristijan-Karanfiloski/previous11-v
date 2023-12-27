@@ -91,7 +91,10 @@ const Activities = ({ navigation }: ActivitiesProps) => {
   };
 
   const renderGameCard = (game: GameAny) => {
-    return <GameCard game={game} playerId={playerId} />;
+    //! added testID
+    return (
+      <GameCard game={game} playerId={playerId} testID={`game-${game.id}`} />
+    );
   };
 
   const renderLoadingCards = () => {
@@ -112,6 +115,8 @@ const Activities = ({ navigation }: ActivitiesProps) => {
     <View style={styles.container}>
       <UpcomingEvent />
       <FlatList
+        //! added the testID
+        testID="activitiesFlatList-games"
         keyExtractor={(item) => item.id}
         data={[...games].reverse()}
         renderItem={({ item }) => renderGameCard(item)}

@@ -21,9 +21,12 @@ import { getTrainingTitle, getZonesData } from '../../heleprs';
 interface GameCardProps {
   game: GameAny;
   playerId: string;
+  testID: string;
 }
 
-const GameCard = ({ game, playerId }: GameCardProps) => {
+const GameCard = ({ game, playerId, testID }: GameCardProps) => {
+  console.log('GAME FROM GAME CARD :', game);
+
   const navigation = useNavigation() as any;
   const isMatch = game.type === 'match';
   const activeClub = useAppSelector(selectActiveClub);
@@ -112,8 +115,7 @@ const GameCard = ({ game, playerId }: GameCardProps) => {
     }
     return (
       <View style={styles.gameTitleContainer}>
-        {isMatch
-          ? (
+        {isMatch ? (
           <View>
             <Text style={styles.gameTitle}>
               vs.{' '}
@@ -123,14 +125,13 @@ const GameCard = ({ game, playerId }: GameCardProps) => {
             </Text>
             <Text style={styles.gameTitle}>{score}</Text>
           </View>
-            )
-          : (
+        ) : (
           <Text
             style={StyleSheet.flatten([styles.gameTitle, { marginBottom: 11 }])}
           >
             {trainingTitle} training
           </Text>
-            )}
+        )}
         <Text style={styles.gameSubtitle}>
           {date}
           {isMatch && ', ' + game.location}
@@ -291,19 +292,17 @@ const GameCard = ({ game, playerId }: GameCardProps) => {
       <View style={styles.header}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ marginRight: 'auto' }}>
-            {isMatch
-              ? (
+            {isMatch ? (
               <Icon
                 style={{ height: 59, width: 59 }}
                 icon={isHockey ? 'match_icehockey' : 'ball_circle'}
               />
-                )
-              : (
+            ) : (
               <Icon
                 style={{ height: 59, width: 59 }}
                 icon={isHockey ? 'training_icehockey' : 'foot_circle'}
               />
-                )}
+            )}
           </View>
           {renderGameTitle()}
         </View>

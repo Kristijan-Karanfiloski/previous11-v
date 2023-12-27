@@ -25,6 +25,11 @@ jest.mock('@react-native-firebase/messaging', () => {
     }
   });
 });
+jest.mock('@logrocket/react-native', () => ({
+  default: {
+    identify: jest.fn()
+  }
+}));
 
 const abortFn = jest.fn();
 // @ts-ignore
