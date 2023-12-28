@@ -14,11 +14,11 @@ export function Icon(props: IconProps) {
   const { style: styleOverride, icon = 'back', containerStyle } = props;
   const style: ImageStyle = { ...ROOT, ...styleOverride };
 
-  const IconComp = icons[icon].default;
+  const IconComp = icons[icon]?.default;
+
+  console.log('IconComp ', IconComp);
 
   return (
-    <View style={containerStyle}>
-      <IconComp style={style} />
-    </View>
+    <View style={containerStyle}>{IconComp && <IconComp style={style} />}</View>
   );
 }

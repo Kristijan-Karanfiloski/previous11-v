@@ -263,7 +263,6 @@ export const updateGameAction = createAsyncThunk(
           );
         }
       }
-
       // Recalculate benchmark for training event if there is no report.
 
       if (

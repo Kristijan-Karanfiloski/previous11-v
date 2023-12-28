@@ -42,6 +42,10 @@ const Profile = ({ navigation }: ProfileProps) => {
   };
 
   const renderEmailField = () => {
+    if (!auth || !auth.email) {
+      return null;
+    }
+
     return (
       <Pressable
         onPress={() => navigation.navigate('ChangeEmail')}
