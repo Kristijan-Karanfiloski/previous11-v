@@ -70,6 +70,7 @@ const Activation = (props: ActivationProps) => {
           </Text>
           <View style={styles.inputContainer}>
             <TextInput
+              testID="emailField"
               style={styles.codeInput}
               placeholder="Activation code here"
               placeholderTextColor={color.palette.tipGrey}
@@ -77,6 +78,7 @@ const Activation = (props: ActivationProps) => {
               autoCorrect={false}
               value={code}
               onChangeText={setCode}
+              accessibilityLabel={'text'}
             />
           </View>
           <View style={styles.buttonContainer}>
