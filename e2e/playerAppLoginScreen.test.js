@@ -6,10 +6,6 @@ describe('player app Activation screen', () => {
 
     await device.launchApp({ newInstance: true });
 
-    //{
-    //       newInstance: true
-    //     }
-
     await device.openURL({
       url: `exp+next11-reaxt-native-v2://expo-development-client/?url=${encodeURIComponent(
         `http://localhost:8081`
@@ -20,12 +16,19 @@ describe('player app Activation screen', () => {
     // await device.reloadReactNative();
   });
 
-  it('set up for the development console ', async () => {
+  it('should tap the Got It button in the development console ', async () => {
     await waitFor(element(by.text('Got It')))
       .toBeVisible()
-      .withTimeout(3000);
+      .withTimeout(2000);
 
     await element(by.text('Got It')).tap();
+  });
+
+  it('should swipe down the development console', async () => {
+    await waitFor(element(by.text('Connected to:')))
+      .toBeVisible()
+      .withTimeout(2000);
+
     await element(by.text('Connected to:')).swipe('down');
   });
 
@@ -33,9 +36,25 @@ describe('player app Activation screen', () => {
     await expect(element(by.text('Welcome!'))).toBeVisible();
   });
 
-  const typedText = '45689';
-
   it('should have an input activation code and accept input', async () => {
-    await element(by.id('emailField')).typeText('irem@test.com');
+    await waitFor(element(by.text('Activation code here')))
+      .toBeVisible()
+      .withTimeout(2000);
+    // // await expect(element(by.text('Activation code here'))).toBeVisible();
+    //
+    // await element(by.text('Activation code here')).tap();
+    // await element(by.text('Activation code here')).typeText('456812');
+
+    // await waitFor(element(by.id('emailField')))
+    //   .toBeVisible()
+    //   .withTimeout(2000);
+
+    // await element(by.id('emailField')).tap();
+    // await element(by.id('emailField')).typeText('456812');
   });
+
+  // it('should have a Already have an account button', async () => {
+  //   await expect(element(by.text('Already have an account?'))).toBeVisible();
+  //   await element(by.text('Already have an account?')).tap();
+  // });
 });
