@@ -1,5 +1,15 @@
 import { device, element, by, waitFor } from 'detox';
 
+// Define constants
+const TEST_IDS = {
+  haveAccountBtn: 'HaveAccountBtn'
+  // ... other test IDs
+};
+const TIMEOUTS = {
+  short: 2000
+  // ... other timeout values
+};
+
 describe('player app Activation screen', () => {
   beforeAll(async () => {
     //new instance makes to close the app and start it again
@@ -19,7 +29,7 @@ describe('player app Activation screen', () => {
   it('should tap the Got It button in the development console ', async () => {
     await waitFor(element(by.text('Got It')))
       .toBeVisible()
-      .withTimeout(2000);
+      .withTimeout(TIMEOUTS.short);
 
     await element(by.text('Got It')).tap();
   });
@@ -27,7 +37,7 @@ describe('player app Activation screen', () => {
   it('should swipe down the development console', async () => {
     await waitFor(element(by.text('Connected to:')))
       .toBeVisible()
-      .withTimeout(2000);
+      .withTimeout(TIMEOUTS.short);
 
     await element(by.text('Connected to:')).swipe('down');
   });
@@ -39,13 +49,13 @@ describe('player app Activation screen', () => {
   it('should have an input activation code and accept input', async () => {
     await waitFor(element(by.text('Activation code here')))
       .toBeVisible()
-      .withTimeout(2000);
+      .withTimeout(TIMEOUTS.short);
   });
 
   it('should have a button Already have an account', async () => {
     await waitFor(element(by.id('HaveAccountBtn')))
       .toBeVisible()
-      .withTimeout(2000);
+      .withTimeout(TIMEOUTS.short);
 
     await element(by.id('HaveAccountBtn')).tap();
   });
