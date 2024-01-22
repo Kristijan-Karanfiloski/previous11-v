@@ -40,21 +40,13 @@ describe('player app Activation screen', () => {
     await waitFor(element(by.text('Activation code here')))
       .toBeVisible()
       .withTimeout(2000);
-    // // await expect(element(by.text('Activation code here'))).toBeVisible();
-    //
-    // await element(by.text('Activation code here')).tap();
-    // await element(by.text('Activation code here')).typeText('456812');
-
-    // await waitFor(element(by.id('emailField')))
-    //   .toBeVisible()
-    //   .withTimeout(2000);
-
-    // await element(by.id('emailField')).tap();
-    // await element(by.id('emailField')).typeText('456812');
   });
 
-  // it('should have a Already have an account button', async () => {
-  //   await expect(element(by.text('Already have an account?'))).toBeVisible();
-  //   await element(by.text('Already have an account?')).tap();
-  // });
+  it('should have a button Already have an account', async () => {
+    await waitFor(element(by.id('HaveAccountBtn')))
+      .toBeVisible()
+      .withTimeout(2000);
+
+    await element(by.id('HaveAccountBtn')).tap();
+  });
 });

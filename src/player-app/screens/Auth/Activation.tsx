@@ -81,6 +81,7 @@ const Activation = ({ navigation }: ActivationProps) => {
         />
 
         <ButtonNew
+          testID="HaveAccountBtn"
           mode="secondary"
           text="Already have an account?"
           onPress={() => navigation.navigate('Login')}

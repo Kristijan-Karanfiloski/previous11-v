@@ -19,7 +19,10 @@ type Props = {
   style?: ViewStyle;
   textStyle?: TextStyle;
   isLoading?: boolean;
+  testID?: string;
 };
+
+// Tuka dodadov testID prop bidejki e reusable komponenta za da moze vo activation po toj test id da baram vo testot za detox
 
 export default function ButtonNew({
   text,
@@ -28,10 +31,12 @@ export default function ButtonNew({
   disabled,
   style,
   textStyle,
-  isLoading
+  isLoading,
+  testID
 }: Props) {
   return (
     <TouchableOpacity
+      testID={testID}
       activeOpacity={0.8}
       style={[
         styles.container,
@@ -42,8 +47,7 @@ export default function ButtonNew({
       disabled={disabled || isLoading}
       onPress={onPress}
     >
-      {!isLoading
-        ? (
+      {!isLoading ? (
         <Text
           style={[
             styles.text,
@@ -54,10 +58,9 @@ export default function ButtonNew({
         >
           {text}
         </Text>
-          )
-        : (
+      ) : (
         <OverlayLoader isLoading isOverlay={false} size="small" />
-          )}
+      )}
     </TouchableOpacity>
   );
 }
