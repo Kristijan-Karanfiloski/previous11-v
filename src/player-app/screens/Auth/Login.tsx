@@ -147,7 +147,9 @@ const Login = ({ navigation, route }: LoginProps) => {
           style={{ width: 60, height: 60 }}
           resizeMode="cover"
         />
-        <Text style={styles.introText}>Welcome!</Text>
+        <Text testID="LoginScreenWelcomeText" style={styles.introText}>
+          Welcome!
+        </Text>
         <Text style={styles.hintText}>
           Enter your email and password to log in and see your performance.
         </Text>

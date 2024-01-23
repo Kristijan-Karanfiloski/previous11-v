@@ -63,6 +63,7 @@ const Activation = ({ navigation }: ActivationProps) => {
 
         <View style={styles.inputContainer}>
           <TextInput
+            testID="ActivationCodeInput"
             style={styles.codeInput}
             placeholder="Activation code here"
             placeholderTextColor={color.palette.tipGrey}
@@ -74,6 +75,7 @@ const Activation = ({ navigation }: ActivationProps) => {
         </View>
 
         <ButtonNew
+          testID="ActivationNextButton"
           text="Next →"
           onPress={onSubmit}
           style={styles.btnNext}
