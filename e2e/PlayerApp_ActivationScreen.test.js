@@ -1,5 +1,7 @@
 import { device, element, by, waitFor } from 'detox';
 
+// As a rule of thumb, end every test with an expect line
+
 // Define constants
 const TEST_IDS = {
   haveAccountBtn: 'HaveAccountBtn',
@@ -81,5 +83,7 @@ describe('player app Activation screen', () => {
     // Assertion
 
     await expect(element(by.id(TEST_IDS.loginScreenWelcomeText))).toBeVisible();
+
+    await expect(element(by.id(TEST_IDS.haveAccountBtn))).not.toBeVisible();
   });
 });
