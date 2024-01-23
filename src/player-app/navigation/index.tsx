@@ -483,33 +483,36 @@ const MainNavigation = () => {
       <Tab.Screen
         name="Progress"
         component={ProgressStackNavigator}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <MaterialIcons
-              name="show-chart"
-              size={24}
-              color={
-                focused ? color.palette.orange : color.palette.lighterBlack
-              }
-            />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={StyleSheet.flatten([
-                {
-                  color: focused
-                    ? color.palette.orange
-                    : color.palette.lighterBlack
-                },
-                styles.tabBarLabel
-              ])}
-            >
-              Progress
-            </Text>
-          ),
-          headerTitleStyle: styles.headerText
-        }}
+        options={
+          {
+            headerShown: false,
+            tabBarIcon: ({ focused }) => (
+              <MaterialIcons
+                name="show-chart"
+                size={24}
+                color={
+                  focused ? color.palette.orange : color.palette.lighterBlack
+                }
+              />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={StyleSheet.flatten([
+                  {
+                    color: focused
+                      ? color.palette.orange
+                      : color.palette.lighterBlack
+                  },
+                  styles.tabBarLabel
+                ])}
+              >
+                Progress
+              </Text>
+            ),
+            headerTitleStyle: styles.headerText
+          }
+          // tabBarTestID:'progress-tab' Adding testID to be used for Detox
+        }
       />
 
       <Tab.Screen
