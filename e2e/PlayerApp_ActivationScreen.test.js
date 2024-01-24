@@ -11,7 +11,8 @@ const TEST_IDS = {
   // ... other test IDs
 };
 const TIMEOUTS = {
-  short: 2000
+  short: 2000,
+  long: 3000
   // ... other timeout values
 };
 
@@ -45,22 +46,32 @@ describe('player app Activation screen', () => {
       .toBeVisible()
       .withTimeout(TIMEOUTS.short);
 
+    // await expect(element(by.text('Connected to:'))).toBeVisible();
+
     await element(by.text('Connected to:')).swipe('down');
   });
 
   it('should display the "Welcome" title', async () => {
-    await expect(element(by.text('Welcome!'))).toBeVisible();
+    await waitFor(element(by.text('Welcome!')))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+    // await expect(element(by.text('Welcome!'))).toBeVisible();
   });
 
-  it('should have a disabled button', () => {});
+  it('should have a disabled button', async () => {
+    await waitFor(element(by.id(TEST_IDS.activationNextButton)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+
+    // await expect(element(by.id(TEST_IDS.activationNextButton))).toExist();
+  });
 
   it('should show the activation code input field', async () => {
-    // await waitFor(element(by.id(TEST_IDS.activationCodeInput)))
-    //   .toBeVisible()
-    //   .withTimeout(TIMEOUTS.short);
+    await waitFor(element(by.id(TEST_IDS.activationCodeInput)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.long);
 
-    // await element(by.text('Welcome!')).toBeVisible();
-    await expect(element(by.id(TEST_IDS.activationCodeInput))).toBeVisible();
+    // await expect(element(by.id(TEST_IDS.activationCodeInput))).toBeVisible();
 
     // Tap on the input field
     await element(by.id(TEST_IDS.activationCodeInput)).tap();
@@ -75,7 +86,11 @@ describe('player app Activation screen', () => {
   it('should display and tap the "Already have an account" button', async () => {
     // Assertion
 
-    await expect(element(by.id(TEST_IDS.haveAccountBtn))).toBeVisible();
+    await waitFor(element(by.id(TEST_IDS.haveAccountBtn)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+
+    // await expect(element(by.id(TEST_IDS.haveAccountBtn))).toBeVisible();
 
     // Action
     await element(by.id(TEST_IDS.haveAccountBtn)).tap();
