@@ -156,6 +156,7 @@ const Login = ({ navigation, route }: LoginProps) => {
 
         <View style={styles.inputContainer}>
           <TextInput
+            testID="PlayerAppLoginEmailInput"
             style={styles.codeInput}
             placeholder="Email"
             placeholderTextColor={color.palette.tipGrey}
@@ -165,6 +166,7 @@ const Login = ({ navigation, route }: LoginProps) => {
             onChangeText={setEmail}
           />
           <TextInput
+            testID="PlayerAppLoginPasswordInput"
             style={styles.codeInput}
             placeholder="Password"
             placeholderTextColor={color.palette.tipGrey}
@@ -189,6 +191,7 @@ const Login = ({ navigation, route }: LoginProps) => {
           }}
         >
           <ButtonNew
+            testID="PlayerAppLoginButton"
             text="Login →"
             onPress={onSubmit}
             style={styles.btnNext}

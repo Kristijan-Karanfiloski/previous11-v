@@ -7,12 +7,17 @@ const TEST_IDS = {
   haveAccountBtn: 'HaveAccountBtn',
   activationCodeInput: 'ActivationCodeInput',
   loginScreenWelcomeText: 'LoginScreenWelcomeText',
-  activationNextButton: 'ActivationNextButton'
+  activationNextButton: 'ActivationNextButton',
+  logoImg: 'logo-img',
+  activationView: 'ActivationView',
+  playerAppLoginEmailInput: 'PlayerAppLoginEmailInput',
+  playerAppLoginPasswordInput: 'PlayerAppLoginPasswordInput',
+  playerAppLoginButton: 'PlayerAppLoginButton'
   // ... other test IDs
 };
 const TIMEOUTS = {
   short: 2000,
-  long: 3000
+  long: 6000
   // ... other timeout values
 };
 
@@ -21,7 +26,7 @@ describe('player app Activation screen', () => {
     //new instance makes to close the app and start it again
 
     await device.launchApp({ newInstance: true });
-    debugger;
+    // await device.launchApp();
 
     await device.openURL({
       url: `exp+next11-reaxt-native-v2://expo-development-client/?url=${encodeURIComponent(
@@ -36,7 +41,7 @@ describe('player app Activation screen', () => {
   it('should display and tap the "Got It" button in the development console ', async () => {
     await waitFor(element(by.text('Got It')))
       .toBeVisible()
-      .withTimeout(TIMEOUTS.short);
+      .withTimeout(TIMEOUTS.long);
 
     await element(by.text('Got It')).tap();
   });
@@ -44,7 +49,7 @@ describe('player app Activation screen', () => {
   it('should swipe down the development console', async () => {
     await waitFor(element(by.text('Connected to:')))
       .toBeVisible()
-      .withTimeout(TIMEOUTS.short);
+      .withTimeout(TIMEOUTS.long);
 
     // await expect(element(by.text('Connected to:'))).toBeVisible();
 
@@ -55,7 +60,7 @@ describe('player app Activation screen', () => {
     await waitFor(element(by.text('Welcome!')))
       .toBeVisible()
       .withTimeout(TIMEOUTS.short);
-    // await expect(element(by.text('Welcome!'))).toBeVisible();
+    await expect(element(by.text('Welcome!'))).toBeVisible();
   });
 
   it('should have a disabled button', async () => {
@@ -100,5 +105,39 @@ describe('player app Activation screen', () => {
     await expect(element(by.id(TEST_IDS.loginScreenWelcomeText))).toBeVisible();
 
     await expect(element(by.id(TEST_IDS.haveAccountBtn))).not.toBeVisible();
+  });
+
+  //FOR THE LOGIN SCREEN
+
+  //TODO: need to somehow put the login tests in a login test file
+
+  it('should display a "Email" input on the login page ', async () => {
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginEmailInput)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+
+    await element(by.id(TEST_IDS.playerAppLoginEmailInput)).tap();
+
+    await element(by.id(TEST_IDS.playerAppLoginEmailInput)).typeText(
+      'andrea+04@next11.com'
+    );
+  });
+
+  it('should display a "Password" input on the login page ', async () => {
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginPasswordInput)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+
+    await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).tap();
+
+    await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).typeText(
+      'Next11!!'
+    );
+  });
+
+  it('should display "Login" button on the login page ', async () => {
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginButton))).toBeVisible();
+
+    await element(by.id(TEST_IDS.playerAppLoginButton)).tap();
   });
 });

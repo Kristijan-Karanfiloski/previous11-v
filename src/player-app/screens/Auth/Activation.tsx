@@ -36,7 +36,7 @@ const Activation = ({ navigation }: ActivationProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View testID="ActivationView" style={styles.container}>
       <Image
         source={bgSplash}
         style={{
