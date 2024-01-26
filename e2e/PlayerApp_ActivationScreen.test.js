@@ -1,4 +1,5 @@
 import { device, element, by, waitFor } from 'detox';
+import TEST_CREDENTIALS from './utils/testCredentials';
 
 // As a rule of thumb, end every test with an expect line
 
@@ -123,7 +124,7 @@ describe('player app Activation screen', () => {
     await element(by.id(TEST_IDS.playerAppLoginEmailInput)).tap();
 
     await element(by.id(TEST_IDS.playerAppLoginEmailInput)).typeText(
-      'andrea+04@next11.com'
+      TEST_CREDENTIALS.email
     );
   });
 
@@ -135,7 +136,7 @@ describe('player app Activation screen', () => {
     await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).tap();
 
     await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).typeText(
-      'Next11!!'
+      TEST_CREDENTIALS.password
     );
   });
 
@@ -146,6 +147,8 @@ describe('player app Activation screen', () => {
   });
 
   //NOTIFICATION MODAL
+
+  //TODO: da gi podelam vo dav it  bloka i da dodam not visible after closing the modal
 
   it('should display "NotificationModal" ', async () => {
     await waitFor(element(by.id(TEST_IDS.notificationModal)))
