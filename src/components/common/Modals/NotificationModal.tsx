@@ -23,9 +23,12 @@ const NotificationModal = ({
   const isHockey = activeClub?.gameType === 'hockey';
   //! added ? after activeClub for problem with testing
 
+  // added testID to test the modal and best practice is adding testID to the most outer view inside the modal and not on the modal
+
   return (
     <Modal isVisible={isVisible} animationIn="fadeIn" animationOut="fadeOut">
-      <View style={styles.modalContainer}>
+      /
+      <View testID="NotificationModal" style={styles.modalContainer}>
         <Icon
           icon={isHockey ? 'boot_and_puck' : 'boot_and_ball'}
           style={{ marginBottom: 30 }}
@@ -57,6 +60,7 @@ const NotificationModal = ({
 
         <View style={{ width: '100%', marginTop: 'auto' }}>
           <ButtonNew
+            testID="NotificationModalAllowButton"
             text="Allow"
             onPress={onSubmit}
             style={{
@@ -66,6 +70,7 @@ const NotificationModal = ({
           />
 
           <ButtonNew
+            testID="NotificationModalSkipForNowButton"
             text="Skip for now"
             onPress={onClose}
             mode="secondary"

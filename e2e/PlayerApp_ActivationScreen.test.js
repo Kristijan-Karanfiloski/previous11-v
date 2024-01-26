@@ -12,7 +12,11 @@ const TEST_IDS = {
   activationView: 'ActivationView',
   playerAppLoginEmailInput: 'PlayerAppLoginEmailInput',
   playerAppLoginPasswordInput: 'PlayerAppLoginPasswordInput',
-  playerAppLoginButton: 'PlayerAppLoginButton'
+  playerAppLoginButton: 'PlayerAppLoginButton',
+  notificationModal: 'NotificationModal',
+  notificationModalAllowButton: 'NotificationModalAllowButton',
+  notificationModalSkipForNowButton: 'NotificationModalSkipForNowButton'
+
   // ... other test IDs
 };
 const TIMEOUTS = {
@@ -139,5 +143,18 @@ describe('player app Activation screen', () => {
     await waitFor(element(by.id(TEST_IDS.playerAppLoginButton))).toBeVisible();
 
     await element(by.id(TEST_IDS.playerAppLoginButton)).tap();
+  });
+
+  //NOTIFICATION MODAL
+
+  it('should display "NotificationModal" ', async () => {
+    await waitFor(element(by.id(TEST_IDS.notificationModal)))
+      .toBeVisible()
+      .withTimeout(60000);
+    await waitFor(element(by.id(TEST_IDS.notificationModalSkipForNowButton)))
+      .toBeVisible()
+      .withTimeout(60000);
+
+    await element(by.id(TEST_IDS.notificationModalSkipForNowButton)).tap();
   });
 });
