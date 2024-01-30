@@ -60,30 +60,46 @@ describe('player app Activation screen', () => {
       .withTimeout(TIMEOUTS.short);
   });
 
-  it('should have a disabled button', async () => {
+  it('should display a button with text "Next →"', async () => {
     await waitFor(element(by.id(TEST_IDS.activationNextButton)))
       .toBeVisible()
       .withTimeout(TIMEOUTS.short);
   });
 
-  it('should show the activation code input field', async () => {
+  it('should display an alert after filling the input code with incorrect code and clicking the next button ', async () => {
     await waitFor(element(by.id(TEST_IDS.activationCodeInput)))
       .toBeVisible()
       .withTimeout(TIMEOUTS.long);
 
+    await waitFor(element(by.id(TEST_IDS.activationNextButton)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+
     // Tap on the input field
     await element(by.id(TEST_IDS.activationCodeInput)).tap();
 
-    // // Type text into the input field
+    // Type text into the input field
     await element(by.id(TEST_IDS.activationCodeInput)).typeText('123456');
+    // action
 
-    // // Clear the text
+    await element(by.id(TEST_IDS.activationNextButton)).tap();
+
+    //assertion
+    await waitFor(element(by.text('OK')))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.short);
+
+    // action
+    await element(by.text('OK')).tap();
+
+    await expect(element(by.text('OK'))).not.toBeVisible();
+
+    // Clear the text
     await element(by.id(TEST_IDS.activationCodeInput)).clearText();
   });
 
   it('should display and tap the "Already have an account" button', async () => {
     // Assertion
-
     await waitFor(element(by.id(TEST_IDS.haveAccountBtn)))
       .toBeVisible()
       .withTimeout(TIMEOUTS.short);
