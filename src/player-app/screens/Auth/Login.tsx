@@ -129,7 +129,7 @@ const Login = ({ navigation, route }: LoginProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View testID="PlayerAppLoginScreen" style={styles.container}>
       <Image
         source={bgSplash}
         style={{

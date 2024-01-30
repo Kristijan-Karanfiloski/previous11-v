@@ -27,7 +27,6 @@ const NotificationModal = ({
 
   return (
     <Modal isVisible={isVisible} animationIn="fadeIn" animationOut="fadeOut">
-      /
       <View testID="NotificationModal" style={styles.modalContainer}>
         <Icon
           icon={isHockey ? 'boot_and_puck' : 'boot_and_ball'}
