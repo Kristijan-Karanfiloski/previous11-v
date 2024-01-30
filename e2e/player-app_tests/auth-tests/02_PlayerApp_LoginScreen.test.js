@@ -1,13 +1,11 @@
 import { element, by, waitFor } from 'detox';
-import TEST_CREDENTIALS from '../utils/testCredentials';
+import TEST_CREDENTIALS from '../../utils/testCredentials';
 
 const TEST_IDS = {
   playerAppLoginEmailInput: 'PlayerAppLoginEmailInput',
   playerAppLoginPasswordInput: 'PlayerAppLoginPasswordInput',
   playerAppLoginButton: 'PlayerAppLoginButton',
-  notificationModal: 'NotificationModal',
-  notificationModalAllowButton: 'NotificationModalAllowButton',
-  notificationModalSkipForNowButton: 'NotificationModalSkipForNowButton'
+  notificationModal: 'NotificationModal'
 };
 const TIMEOUTS = {
   short: 2000,
@@ -61,38 +59,43 @@ describe('Player app Login screen', () => {
       .withTimeout(TIMEOUTS.short);
 
     await element(by.text('OK')).tap();
-    // await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).tap();
-
-    // await element(by.id(TEST_IDS.playerAppLoginEmailInput)).typeText('1234567');
   });
 
-  // it('should display a "Email" input on the login page ', async () => {
-  //   await waitFor(element(by.id(TEST_IDS.playerAppLoginEmailInput)))
-  //     .toBeVisible()
-  //     .withTimeout(TIMEOUTS.short);
+  it('after clearing the inputs and giving valid credentials for a valid user to take me to the activities page', async () => {
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginEmailInput)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.long);
 
-  //   await element(by.id(TEST_IDS.playerAppLoginEmailInput)).tap();
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginPasswordInput)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.long);
 
-  //   await element(by.id(TEST_IDS.playerAppLoginEmailInput)).typeText(
-  //     TEST_CREDENTIALS.email
-  //   );
-  // });
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginButton)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.long);
 
-  // it('should display a "Password" input on the login page ', async () => {
-  //   await waitFor(element(by.id(TEST_IDS.playerAppLoginPasswordInput)))
-  //     .toBeVisible()
-  //     .withTimeout(TIMEOUTS.short);
+    await waitFor(element(by.id(TEST_IDS.playerAppLoginButton)))
+      .toBeVisible()
+      .withTimeout(TIMEOUTS.long);
 
-  //   await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).tap();
+    // ACTION
 
-  //   await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).typeText(
-  //     TEST_CREDENTIALS.password
-  //   );
-  // });
+    await element(by.id(TEST_IDS.playerAppLoginEmailInput)).clearText();
 
-  // it('should display "Login" button on the login page ', async () => {
-  //   await waitFor(element(by.id(TEST_IDS.playerAppLoginButton))).toBeVisible();
+    await element(by.id(TEST_IDS.playerAppLoginEmailInput)).typeText(
+      TEST_CREDENTIALS.email
+    );
 
-  //   await element(by.id(TEST_IDS.playerAppLoginButton)).tap();
-  // });
+    await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).clearText();
+
+    await element(by.id(TEST_IDS.playerAppLoginPasswordInput)).typeText(
+      TEST_CREDENTIALS.password
+    );
+
+    await element(by.id(TEST_IDS.playerAppLoginButton)).tap();
+
+    await waitFor(element(by.id(TEST_IDS.notificationModal)))
+      .toBeVisible()
+      .withTimeout(60000);
+  });
 });
