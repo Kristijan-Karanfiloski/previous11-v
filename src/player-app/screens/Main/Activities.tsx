@@ -99,9 +99,11 @@ const Activities = ({ navigation }: ActivitiesProps) => {
 
   const renderLoadingCards = () => {
     return (
-      <View style={styles.container}>
+      <View testID="GameCardsPlaceholderView" style={styles.container}>
         {Array.from({ length: 5 }, (_, i) => {
-          return <GameCardPlaceholder key={i} />;
+          return (
+            <GameCardPlaceholder key={i} testID={`gameCardPlaceholder-${i}`} />
+          );
         })}
       </View>
     );

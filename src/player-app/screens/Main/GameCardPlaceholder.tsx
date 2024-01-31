@@ -3,7 +3,13 @@ import ContentLoader, { Circle, Rect } from 'react-content-loader/native';
 
 import { variables } from '../../../utils/mixins';
 
-const GameCardPlaceholder = (props: any) => {
+interface GameCardPlaceholderProps {
+  testID?: string;
+}
+
+const GameCardPlaceholder: React.FC<GameCardPlaceholderProps> = ({
+  testID
+}) => {
   return (
     <ContentLoader
       height={150}
@@ -11,7 +17,8 @@ const GameCardPlaceholder = (props: any) => {
       viewBox="0 0 370 150"
       backgroundColor={variables.lightestGrey}
       foregroundColor={variables.greyC3}
-      {...props}
+      testID={testID}
+      // {...props}
     >
       <Circle cx="70.2" cy="73.2" r="41.3" />
       <Rect x="129.9" y="29.5" width="125.5" height="17" />

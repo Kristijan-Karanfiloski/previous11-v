@@ -6,7 +6,8 @@ import { device, element, by, waitFor } from 'detox';
 const TEST_IDS = {
   notificationModal: 'NotificationModal',
   notificationModalAllowButton: 'NotificationModalAllowButton',
-  notificationModalSkipForNowButton: 'NotificationModalSkipForNowButton'
+  notificationModalSkipForNowButton: 'NotificationModalSkipForNowButton',
+  gameCardPlaceholder: 'GameCardsPlaceholderView'
 };
 const TIMEOUTS = {
   short: 2000,
@@ -21,7 +22,6 @@ describe('player app Activities screen', () => {
     await device.launchApp({ newInstance: false });
   });
 
-  //NOTIFICATION MODAL
   it('should display "NotificationModal" ', async () => {
     await waitFor(element(by.id(TEST_IDS.notificationModal)))
       .toBeVisible()

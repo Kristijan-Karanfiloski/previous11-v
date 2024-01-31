@@ -5,7 +5,10 @@ const TEST_IDS = {
   playerAppLoginEmailInput: 'PlayerAppLoginEmailInput',
   playerAppLoginPasswordInput: 'PlayerAppLoginPasswordInput',
   playerAppLoginButton: 'PlayerAppLoginButton',
-  notificationModal: 'NotificationModal'
+  notificationModal: 'NotificationModal',
+  gameCardPlaceholder: 'gameCardPlaceholder',
+  GameCardsPlaceholderView: 'GameCardsPlaceholderView',
+  gameCardPlaceholder: 'GameCardsPlaceholderView'
 };
 const TIMEOUTS = {
   short: 2000,
@@ -93,6 +96,13 @@ describe('Player app Login screen', () => {
     );
 
     await element(by.id(TEST_IDS.playerAppLoginButton)).tap();
+
+    //TODO: BEFORE THE NOTIFICATION MODAL THERE ARE CARD PLACEHOLDERS MAYBE WRITE TEST FOR THAT
+    //CHECKING IF THE FIRST PLACEHOLDER IS THERE
+
+    // await waitFor(element(by.id('gameCardPlaceholder-0')))
+    //   .toBeVisible()
+    //   .withTimeout(3000);
 
     await waitFor(element(by.id(TEST_IDS.notificationModal)))
       .toBeVisible()
