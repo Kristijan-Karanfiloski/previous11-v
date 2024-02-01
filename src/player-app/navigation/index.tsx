@@ -561,6 +561,7 @@ const MainNavigation = () => {
         name="Profile"
         component={ProfileStackNavigator}
         options={{
+          tabBarTestID: 'profile-tab',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Icon

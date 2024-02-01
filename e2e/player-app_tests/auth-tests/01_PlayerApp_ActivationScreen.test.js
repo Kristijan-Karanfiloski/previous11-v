@@ -24,6 +24,7 @@ describe('player app Activation screen', () => {
     //new instance makes to close the app and start it again
 
     await device.launchApp({ newInstance: true });
+    debugger;
     // await device.launchApp();
 
     await device.openURL({
